@@ -1,5 +1,6 @@
 import { Card, CardBody, HStack, Heading, Image, Text } from "@chakra-ui/react";
-import { ReadingLogEntry } from "./BookGrid";
+
+import useBooks, { ReadingLogEntry } from "../hooks/useBooks";
 
 interface Props {
   book: ReadingLogEntry;
@@ -7,7 +8,7 @@ interface Props {
 
 const BookCard = ({ book }: Props) => {
   return (
-    <Card borderRadius="10px" overflow="hidden">
+    <Card>
       <Image
         src={`https://covers.openlibrary.org/b/id/${book.work.cover_id}-L.jpg`}
       />

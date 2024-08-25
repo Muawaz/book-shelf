@@ -1,47 +1,12 @@
-import React, { useEffect, useState } from "react";
-import axios, { CanceledError } from "axios";
 import { SimpleGrid, Text } from "@chakra-ui/react";
 import BookCard from "./BookCard";
-
-export interface Work {
-  title: string;
-  cover_id: number;
-  author_names: string[];
-  first_published_year: number;
-}
-
-export interface ReadingLogEntry {
-  work: Work;
-}
-
-interface FetchBookResponse {
-  page: number;
-  numFound: number;
-  reading_log_entries: ReadingLogEntry[];
-}
+import BookCardSkeleton from "./BookCardSkeleton";
+import BookCardContainer from "./BookCardContainer";
+import useBooks from "../hooks/useBooks";
 
 const BookGrid = () => {
-  const [books, setBooks] = useState<ReadingLogEntry[]>([]);
-  const [error, setError] = useState();
-
-  useEffect(() => {
-    const controller = new AbortController();
-    axios
-      .get<FetchBookResponse>(
-        "https://openlibrary.org/people/mekBot/books/want-to-read.json",
-        { signal: controller.signal }
-      )
-      .then((res) => {
-        setBooks(res.data.reading_log_entries);
-        console.log(res.data.reading_log_entries);
-      })
-      .catch((err) => {
-        if (err instanceof CanceledError) return;
-        setError(err.message);
-      });
-
-    return () => controller.abort();
-  }, []);
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const { books, error, isLoading } = useBooks();
 
   return (
     <>
@@ -51,8 +16,16 @@ const BookGrid = () => {
         spacing={5}
         padding="20px"
       >
+        {isLoading &&
+          skeletons.map((skeleton, index) => (
+            <BookCardContainer key={index}>
+              <BookCardSkeleton />
+            </BookCardContainer>
+          ))}
         {books.map((book, index) => (
-          <BookCard key={index} book={book} />
+          <BookCardContainer key={index}>
+            <BookCard book={book} />
+          </BookCardContainer>
         ))}
       </SimpleGrid>
     </>
