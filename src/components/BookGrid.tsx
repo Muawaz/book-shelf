@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios, { CanceledError } from "axios";
-import { Text } from "@chakra-ui/react";
+import { SimpleGrid, Text } from "@chakra-ui/react";
+import BookCard from "./BookCard";
 
-interface Work {
+export interface Work {
   title: string;
   cover_id: number;
   author_names: string[];
   first_published_year: number;
 }
 
-interface ReadingLogEntry {
+export interface ReadingLogEntry {
   work: Work;
 }
 
@@ -45,17 +46,15 @@ const BookGrid = () => {
   return (
     <>
       {error && <Text>{error}</Text>}
-      <ul>
+      <SimpleGrid
+        columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
+        spacing={5}
+        padding="20px"
+      >
         {books.map((book, index) => (
-          <li key={index}>
-            <h2>{book.work.title}</h2>
-            <img
-              src={`https://covers.openlibrary.org/b/id/${book.work.cover_id}-M.jpg`}
-              alt={book.work.title}
-            />
-          </li>
+          <BookCard key={index} book={book} />
         ))}
-      </ul>
+      </SimpleGrid>
     </>
   );
 };
