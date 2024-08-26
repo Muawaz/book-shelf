@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import axios, { CanceledError } from "axios";
 import apiClient from "../services/api-client";
+import { StepIndicatorProps } from "@chakra-ui/react";
 
 export interface Work {
     title: string;
-    cover_id: number;
-    author_names: string[];
-    first_published_year: number;
+    key: string
+    cover_id?: number;
+    author_names?: string[];
+    first_published_year?: number;
+    genres?: string[]
 }
 
 export interface ReadingLogEntry {
@@ -23,6 +26,7 @@ const useBooks = () => {
 
     
   const [books, setBooks] = useState<ReadingLogEntry[]>([]);
+  const [genres, setGenres] = useState<string[]>([])
   const [error, setError] = useState();
   const [isLoading, setLoading] = useState(false);
 
@@ -48,7 +52,19 @@ const useBooks = () => {
     return () => controller.abort();
   }, []);
 
-  return {books, error, isLoading}
+  // useEffect(() => {
+  //   if (books.length > 0) {
+  //     // Extract unique genres from the books state
+  //     const allGenres = books
+  //       .flatMap((entry) => entry.work.genres || [])
+  //       .filter((genre, index, self) => self.indexOf(genre) === index);
+
+  //     console.log('Extracted genres:', allGenres);
+  //     setGenres(allGenres);
+  //   }
+  // }, [books]);
+
+  return {books, error, isLoading, genres}
 
 }
 

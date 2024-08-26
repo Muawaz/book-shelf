@@ -1,6 +1,15 @@
-import { Card, CardBody, HStack, Heading, Image, Text } from "@chakra-ui/react";
+import {
+  Card,
+  CardBody,
+  Divider,
+  HStack,
+  Heading,
+  Image,
+  Text,
+} from "@chakra-ui/react";
 
 import useBooks, { ReadingLogEntry } from "../hooks/useBooks";
+import BookRating from "./BookRating";
 
 interface Props {
   book: ReadingLogEntry;
@@ -16,13 +25,15 @@ const BookCard = ({ book }: Props) => {
       //   bgColor="aqua"
       >
         <Heading fontSize="2xl">~~{book.work.title}~~</Heading>
-        <HStack marginY={5}>
+        <BookRating book={book} />
+        <Divider marginY={1} borderWidth="2px" borderColor="aqua" />
+        <HStack>
           <Heading fontSize="xs">Authored By:</Heading>
           {book.work.author_names && (
             <Text>{book.work.author_names.join(", ")}</Text>
           )}
         </HStack>
-        <Text>{book.work.first_published_year}</Text>
+        <Text>{book.work.key}</Text>
       </CardBody>
     </Card>
   );
