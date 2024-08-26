@@ -13,7 +13,7 @@ const BookRating = ({ book }: Props) => {
     <Box display="flex" alignItems="center" justifyContent="flex-end" p={4}>
       <StarIcon mr={8} color="#FFD700" />
       {
-        <Text fontSize="lg" lineHeight="0.1">
+        <Text fontSize="md" lineHeight="0.1">
           {rating ? rating.toFixed(2) : "N/A"}
         </Text>
       }

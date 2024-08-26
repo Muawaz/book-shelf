@@ -25,15 +25,21 @@ const BookCard = ({ book }: Props) => {
       //   bgColor="aqua"
       >
         <Heading fontSize="2xl">~~{book.work.title}~~</Heading>
-        <BookRating book={book} />
-        <Divider marginY={1} borderWidth="2px" borderColor="aqua" />
-        <HStack>
-          <Heading fontSize="xs">Authored By:</Heading>
-          {book.work.author_names && (
-            <Text>{book.work.author_names.join(", ")}</Text>
-          )}
+        <HStack justifyContent="space-between">
+          <Heading fontSize="xs">Rating :</Heading>
+          <BookRating book={book} />
         </HStack>
-        <Text>{book.work.key}</Text>
+        <Divider borderWidth="2px" borderColor="aqua" />
+        <HStack alignItems="right" justifyContent=" space-between">
+          <Heading fontSize="xs">Authored By :</Heading>
+          <Text>
+            {book.work.author_names && book.work.author_names.join(" , ")}
+          </Text>
+        </HStack>
+        <HStack marginY={1} justifyContent="space-between">
+          <Heading fontSize="xs">Published Year :</Heading>
+          <Text>{book.work.first_publish_year}</Text>
+        </HStack>
       </CardBody>
     </Card>
   );
