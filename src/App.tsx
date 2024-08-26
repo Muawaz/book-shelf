@@ -15,15 +15,24 @@ function App() {
         lg: "200px 1fr",
       }}
     >
-      <GridItem area="nav" bg="coral">
+      <GridItem
+        area="nav"
+        // bg="coral"
+      >
         <NavBar />
       </GridItem>
       <Show above="lg">
-        <GridItem area="aside" bg="gold">
+        <GridItem
+          area="aside"
+          // bg="gold"
+        >
           <GenreList />
         </GridItem>
       </Show>
-      <GridItem area="main" bg="dodgerblue">
+      <GridItem
+        area="main"
+        // bg="dodgerblue"
+      >
         <BookGrid />
       </GridItem>
     </Grid>
