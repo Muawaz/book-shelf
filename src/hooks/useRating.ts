@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
 import { ReadingLogEntry } from "./useBooks";
-import { CanceledError } from "axios";
 import useData from "./useData";
 
 interface FetchRatingResponse {
